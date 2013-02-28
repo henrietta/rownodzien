@@ -4,6 +4,7 @@ from datetime import datetime
 from rownodzien.people.models import Librarian, Reader
 
 class Book(models.Model):
+    """Ta tabela określa książki dostępne w systemie"""
     author = models.CharField(max_length=40)
     title = models.CharField(max_length=40)
     year = models.IntegerField()
@@ -11,6 +12,7 @@ class Book(models.Model):
     isbn = models.CharField(max_length=13, null=True)
 
 class BookInstance(models.Model):
+    """Ta tabela określa egzemplarze książek dostępne w systemie"""
     book = models.ForeignKey(Book, related_name='instances', verbose_name=u'Książka')
 
     code = models.CharField(max_length=14, verbose_name=u'Nr lub kod kreskowy')
@@ -19,6 +21,12 @@ class BookInstance(models.Model):
     is_lost = models.BooleanField(default=False, verbose_name=u'Czy zagubiona?')
 
 class BookRent(models.Model):
+    """
+    Ta tabela określa wypożyczenia.
+
+    Egzemplarz jest wypożyczony jeśli ma przynajmniej jedno wypożyczenie którego 
+    pole real_due jest NULL (czyli jeszcze nie oddano)
+    """
     bookinstance = models.ForeignKey(BookInstance, related_name='rentings')
     who = models.ForeignKey(Librarian, related_name='rentings')
     whom = models.ForeignKey(Reader, related_name='rentings')

@@ -2,6 +2,7 @@
 from django.db import models
 
 class Reader(models.Model):
+    """Ta tabela określa czytelników obecnych w systemie"""
     number = models.DecimalField(max_digits=4, verbose_name=u'Numer czytelnika')
 
     pesel = models.CharField(max_length=10, verbose_name=u'PESEL')
@@ -10,6 +11,7 @@ class Reader(models.Model):
     phone = models.CharField(max_length=30, verbose_name=u'Telefon')
 
 class Librarian(models.Model):
+    """Ta tabela określa bibliotekarzy obecnych w systemie"""
     number = models.DecimalField(max_digits=4, verbose_name=u'Numer czytelnika')
 
     name = models.CharField(max_length=50, verbose_name=u'Imię')
