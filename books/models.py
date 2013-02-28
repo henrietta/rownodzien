@@ -9,7 +9,7 @@ class Book(models.Model):
     title = models.CharField(max_length=40)
     year = models.IntegerField()
 
-    isbn = models.CharField(max_length=13, null=True)
+    isbn = models.CharField(max_length=13, unique=True)
 
 class BookInstance(models.Model):
     """Ta tabela określa egzemplarze książek dostępne w systemie"""
