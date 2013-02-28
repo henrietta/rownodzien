@@ -20,6 +20,17 @@ class BookInstance(models.Model):
     is_damaged = models.BooleanField(default=False, verbose_name=u'Czy uszkodzona?')
     is_lost = models.BooleanField(default=False, verbose_name=u'Czy zagubiona?')
 
+    def is_rented(self):
+        """
+        Zwraca czy książka jest wypożyczona.
+
+        Książka jest wypożyczona jeśli ma jeden rekord BookRent którego
+        pole real_due wynosi NULL
+
+        @return: bool
+        """
+        return self.rentings.filter(real_due__isnull=True).count() == 1
+
 class BookRent(models.Model):
     """
     Ta tabela określa wypożyczenia.
