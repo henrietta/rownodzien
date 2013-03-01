@@ -5,6 +5,7 @@
 {% block content %}
     <form action="/reader/{{ reader.number }}/" method="POST">
         <table>
+        <tr><td>Numer ID: </td><td> {{ reader.number }}</td></tr>
         {{ form.as_table }}
         <tr><td colspan="2"><input type="submit" value="Zapisz"></td></tr>
         </table>
