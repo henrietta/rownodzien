@@ -6,12 +6,20 @@
     <link rel="stylesheet" type="text/css" href="/media/css/style.css">
 </head>
 <body>
-    <div id="header">
+    <div id="header">       {# sekcja nagłówka #}
         <h1>równodzień</h1>
         tandetny system biblioteczny
     </div>
+    {% if messages %}       {# sekcja wiadomości od systemu #}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
     <hr>
-    {% block content %}
+    {% endif %}    
+    <hr>
+    {% block content %}    {# sekcja danych szablonów dziedziczących #}
     {% endblock %}
 </body>
 </html>

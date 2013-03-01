@@ -6,6 +6,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('rownodzien',
     url(r'^$', 'main.views.main'),
+    url(r'^book/add/$', 'books.form_book.add_book'),
+    url(r'^book/(?P<isbn>\d+)/$', 'books.form_book.edit_book'),
     # Examples:
     # url(r'^$', 'rownodzien.views.home', name='home'),
     # url(r'^rownodzien/', include('rownodzien.foo.urls')),
