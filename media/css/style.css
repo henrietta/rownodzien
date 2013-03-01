@@ -1,0 +1,13 @@
+body {
+    background: rgb(0, 78, 152);
+    font-family: "Open Sans", arial, sans-serif;
+    color: white;
+}
+
+#header {
+    font-size: 12px;
+}
+    #header h1 {
+        font-size: 40px;
+        margin: 0 0 0 0;
+    }
