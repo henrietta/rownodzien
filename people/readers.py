@@ -6,8 +6,7 @@ from django.contrib.localflavor.pl.forms import PLPESELField
 from django.contrib import messages
 from decimal import Decimal
 
-from rownodzien.people.models import Reader
-from rownodzien.people import suggest_unique_number
+from rownodzien.people.models import Reader, get_unique_number
 from rownodzien.main import sysfault
 
 class ReaderForm(forms.ModelForm):
@@ -26,7 +25,7 @@ def add_reader(request):
         form = ReaderForm(request.POST)
         if form.is_valid():
             try:
-                form.instance.number = suggest_unique_number(Reader)
+                form.instance.number = get_unique_number(Reader)
             except ValueError:
                 return sysfault(u"""Nie można nadać czytelnikowi unikatowego numeru
                                   czterocyfrowego. Wszystkie numery są już zajęte. Problem
