@@ -5,11 +5,11 @@ from rownodzien.people.models import Librarian, Reader
 
 class Book(models.Model):
     """Ta tabela określa książki dostępne w systemie"""
-    author = models.CharField(max_length=40)
-    title = models.CharField(max_length=40)
-    year = models.IntegerField()
+    author = models.CharField(max_length=40, verbose_name=u'Autor')
+    title = models.CharField(max_length=40, verbose_name=u'Tytuł')
+    year = models.IntegerField(verbose_name=u'Rok wydania')
 
-    isbn = models.CharField(max_length=13, unique=True)
+    isbn = models.CharField(max_length=13, unique=True, verbose_name=u'ISBN')
 
 class BookInstance(models.Model):
     """Ta tabela określa egzemplarze książek dostępne w systemie"""
