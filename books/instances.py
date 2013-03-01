@@ -3,7 +3,6 @@
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django import forms
 from django.contrib import messages
-import pyisbn
 from urllib import quote_plus as urlquote
 
 from rownodzien.books.models import BookInstance, Book
@@ -12,7 +11,7 @@ from rownodzien.books.models import BookInstance, Book
 class BookInstanceForm(forms.ModelForm):
     """Formularz służący do dodawania/edytowania egzemplarza"""
     class Meta:
-        model = BookInstance        # wzoruj formularz na tabeli Book
+        model = BookInstance        # wzoruj formularz na tabeli BookInstance
         exclude = ('book', ) # nie wyświetlaj pola book
 
 def add_instance(request, isbn):
@@ -42,7 +41,7 @@ def edit_instance(request, code):
         if form.is_valid():
             form.save()
             cd = form.instance.code
-            messages.add_message(request, messages.INFO, u'Zmieniono książkę')
+            messages.add_message(request, messages.INFO, u'Zmieniono egzemplarz')
             return redirect('/instance/%s/' % urlquote(form.instance.code))
 
     return render_to_response('instances/edit.html', {'request': request,
@@ -54,5 +53,5 @@ def delete_instance(request, code):
     instance = get_object_or_404(BookInstance, code=code)
     bookisbn = instance.book.isbn
     instance.delete()
-    messages.add_message(request, messages.INFO, u'Usunięto książkę')
+    messages.add_message(request, messages.INFO, u'Usunięto egzemplarz')
     return redirect('/book/%s/' % bookisbn)
