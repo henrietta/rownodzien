@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}równodzień - edytuj książkę{% endblock %}
+{% block title %}równodzień - edytuj egzemplarz{% endblock %}
 
 {% block content %}
-    <a href="/book/{{ book.isbn }}/add_instance/">Dodaj egzemplarz</a><br>
-    <form action="/book/{{ book.isbn }}/" method="POST">
+    <form action="/instance/{{ instance.code }}/" method="POST">
         <table>
         {{ form.as_table }}
         <tr><td colspan="2"><input type="submit" value="Zapisz"></td></tr>
