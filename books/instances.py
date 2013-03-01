@@ -1,10 +1,11 @@
 # coding=UTF-8
 """Kontrolery obsługujące zarządzanie książkami"""
-from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django import forms
 from django.contrib import messages
 from urllib import quote_plus as urlquote
 
+from rownodzien.main import render_to_response
 from rownodzien.books.models import BookInstance, Book
 
 
@@ -27,9 +28,7 @@ def add_instance(request, isbn):
             messages.add_message(request, messages.INFO, u'Dodano egzemplarz')
             return redirect('/instance/%s/' % urlquote(form.instance.code))
 
-    return render_to_response('instances/add.html', {'request': request,
-                                                     'form': form,
-                                                     'book': book})
+    return render_to_response('instances/add.html', request, form=form, book=book)
 
 def edit_instance(request, code):
     """Kontroler edycji egzemplarza"""
@@ -44,9 +43,7 @@ def edit_instance(request, code):
             messages.add_message(request, messages.INFO, u'Zmieniono egzemplarz')
             return redirect('/instance/%s/' % urlquote(form.instance.code))
 
-    return render_to_response('instances/edit.html', {'request': request,
-                                                      'form': form,
-                                                      'instance': instance})
+    return render_to_response('instances/edit.html', request, form=form, instance=instance)
 
 def delete_instance(request, code):
     """Kontroler kasowania egzemplarza"""

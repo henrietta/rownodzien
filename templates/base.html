@@ -11,12 +11,12 @@
         tandetny system biblioteczny
     </div>
     {% if messages %}       {# sekcja wiadomości od systemu #}
+    <hr>
     <ul class="messages">
         {% for message in messages %}
         <li>{{ message }}</li>
         {% endfor %}
     </ul>
-    <hr>
     {% endif %}    
     <hr>
     {% block content %}    {# sekcja danych szablonów dziedziczących #}

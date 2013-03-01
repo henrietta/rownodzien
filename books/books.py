@@ -1,10 +1,11 @@
 # coding=UTF-8
 """Kontrolery obsługujące zarządzanie książkami"""
-from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django import forms
 from django.contrib import messages
 import pyisbn
 
+from rownodzien.main import render_to_response
 from rownodzien.books.models import Book
 
 class BookForm(forms.ModelForm):
@@ -33,8 +34,7 @@ def add_book(request):
             messages.add_message(request, messages.INFO, u'Dodano książkę')
             return redirect('/book/%s/' % form.instance.isbn)
 
-    return render_to_response('books/add.html', {'request': request,
-                                                 'form': form})
+    return render_to_response('books/add.html', request, form=form)
 
 def edit_book(request, isbn):
     """Kontroler edycji książki"""
@@ -48,9 +48,7 @@ def edit_book(request, isbn):
             messages.add_message(request, messages.INFO, u'Zmieniono książkę')
             return redirect('/book/%s/' % form.instance.isbn)
 
-    return render_to_response('books/edit.html', {'request': request,
-                                                 'form': form,
-                                                 'book': book})
+    return render_to_response('books/edit.html', request, form=form, book=book)
 
 def delete_book(request, isbn):
     """Kontroler kasowania książki"""

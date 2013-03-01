@@ -1,13 +1,13 @@
 # coding=UTF-8
 """Kontrolery obsługujące zarządzanie czytelnikami"""
-from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django import forms
 from django.contrib.localflavor.pl.forms import PLPESELField
 from django.contrib import messages
 from decimal import Decimal
 
 from rownodzien.people.models import Reader, get_unique_number
-from rownodzien.main import sysfault
+from rownodzien.main import sysfault, render_to_response
 
 class ReaderForm(forms.ModelForm):
     """Formularz służący do dodawania/edycji czytelnika"""
@@ -35,8 +35,7 @@ def add_reader(request):
             messages.add_message(request, messages.INFO, u'Dodano czytelnika')
             return redirect('/reader/%s/' % form.instance.number)
 
-    return render_to_response('readers/add.html', {'request': request,
-                                                     'form': form})
+    return render_to_response('readers/add.html', request, form=form)
 
 def edit_reader(request, number):
     """Kontroler edycji czytelnika"""
@@ -50,9 +49,7 @@ def edit_reader(request, number):
             messages.add_message(request, messages.INFO, u'Zmieniono czytelnika')
             return redirect('/reader/%s/' % form.instance.number)
 
-    return render_to_response('readers/edit.html', {'request': request,
-                                                   'form': form,
-                                                   'reader': instance})
+    return render_to_response('readers/edit.html', request, form=form, reader=instance)
 
 def delete_reader(request, number):
     """Kontroler kasowania czytelnika"""
