@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}równodzień - dodaj bibliotekarza{% endblock %}
+
+{% block content %}
+    <form action="/librarian/add/" method="POST">
+        <table>
+        {{ form.as_table }}
+        <tr><td colspan="2"><input type="submit" value="Zapisz"></td></tr>
+        </table>
+    </form>
+{% endblock %}

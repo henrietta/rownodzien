@@ -14,6 +14,10 @@ urlpatterns = patterns('rownodzien',
     url(r'^reader/(?P<number>\d+)/delete/$', 'people.readers.delete_reader'),
     url(r'^reader/(?P<number>\d+)/$', 'people.readers.edit_reader'),
 
+    url(r'^librarian/add/$', 'people.librarians.add_librarian'),
+    url(r'^librarian/(?P<number>\d+)/delete/$', 'people.librarians.delete_librarian'),
+    url(r'^librarian/(?P<number>\d+)/$', 'people.librarians.edit_librarian'),
+
 )
 
 urlpatterns += staticfiles_urlpatterns()

@@ -39,7 +39,7 @@ def add_reader(request):
                                                      'form': form})
 
 def edit_reader(request, number):
-    """Kontroler edycji egzemplarza"""
+    """Kontroler edycji czytelnika"""
     instance = get_object_or_404(Reader, number=Decimal(number))
     form = ReaderForm(instance=instance)
 

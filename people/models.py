@@ -17,7 +17,7 @@ class Librarian(models.Model):
     name = models.CharField(max_length=50, verbose_name=u'Imię')
     surname = models.CharField(max_length=50, verbose_name=u'Nazwisko')
 
-    pesel = models.CharField(max_length=10, verbose_name=u'PESEL')
+    pesel = models.CharField(max_length=11, verbose_name=u'PESEL')
 
 def get_unique_number(model):
     """
