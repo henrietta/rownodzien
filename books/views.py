@@ -51,3 +51,9 @@ def edit_book(request, isbn):
     return render_to_response('books/edit.html', {'request': request,
                                                  'form': form,
                                                  'book': book})
+
+def delete_book(request, isbn):
+    """Kontroler kasowania książki"""
+    book = get_object_or_404(Book, isbn=isbn).delete()
+    messages.add_message(request, messages.INFO, u'Usunięto książkę')
+    return redirect('/')
