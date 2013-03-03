@@ -3,12 +3,22 @@
 {% block title %}równodzień - edytuj egzemplarz{% endblock %}
 
 {% block content %}
-    <form action="/instance/{{ instance.code }}/" method="POST">
+    To jest egzemplarz książki <strong>{{ instance.book.title }}</strong>
+    autorstwa <strong>{{ instance.book.author }}</strong>
+    o numerze ISBN <strong>{{ instance.book.isbn }}</strong>
+    wydana w roku <strong>{{ instance.book.year }}</strong><br>
+    <a href="{{ instance.book.get_absolute_url }}">wróć do książki</a>
+    <hr>
+    <form action="{{ instance.get_absolute_url }}/" method="POST">
         <table>
         {{ form.as_table }}
         <tr><td colspan="2"><input type="submit" value="Zapisz"></td></tr>
         </table>
     </form>
     <hr>
-    <a href="/rent/register/{{ instance.code|urlencode }}">Wypożycz</a>
+    {% if instance.is_rented %}
+        Już wypożyczona
+    {% else %}
+        <a href="/rent/register/{{ instance.code|urlencode }}">Wypożycz</a>
+    {% endif %}
 {% endblock %}

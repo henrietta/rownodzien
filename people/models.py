@@ -10,6 +10,9 @@ class Reader(models.Model):
     surname = models.CharField(max_length=50, verbose_name=u'Nazwisko')
     phone = models.CharField(max_length=30, verbose_name=u'Telefon')
 
+    def __unicode__(self):
+        return u'#%s %s %s' % (self.number, self.name, self.surname)
+
 class Librarian(models.Model):
     """Ta tabela określa bibliotekarzy obecnych w systemie"""
     number = models.DecimalField(max_digits=4, decimal_places=0, unique=True, verbose_name=u'Numer bibliotekarza')
@@ -18,6 +21,10 @@ class Librarian(models.Model):
     surname = models.CharField(max_length=50, verbose_name=u'Nazwisko')
 
     pesel = models.CharField(max_length=11, verbose_name=u'PESEL')
+
+    def __unicode__(self):
+        return u'#%s %s %s' % (self.number, self.name, self.surname)
+
 
 def get_unique_number(model):
     """

@@ -11,9 +11,9 @@ class BookRent(models.Model):
     Egzemplarz jest wypożyczony jeśli ma przynajmniej jedno wypożyczenie którego 
     pole real_due jest NULL (czyli jeszcze nie oddano)
     """
-    bookinstance = models.ForeignKey(BookInstance, related_name='rentings')
-    who = models.ForeignKey(Librarian, related_name='rentings')
-    whom = models.ForeignKey(Reader, related_name='rentings')
+    bookinstance = models.ForeignKey(BookInstance, related_name='rentings', verbose_name=u'Egzemplarz')
+    who = models.ForeignKey(Librarian, related_name='rentings', verbose_name=u'Kto wypożycza')
+    whom = models.ForeignKey(Reader, related_name='rentings', verbose_name=u'Komu wypożycza')
 
     when_rented = models.DateTimeField(default=datetime.now, verbose_name=u'Kiedy wypożyczono')
 

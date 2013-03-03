@@ -2,6 +2,7 @@
 from django.db import models
 from datetime import datetime
 from rownodzien.people.models import Librarian, Reader
+from urllib import quote_plus as urlquote
 
 class Book(models.Model):
     """Ta tabela określa książki dostępne w systemie"""
@@ -14,6 +15,10 @@ class Book(models.Model):
     class Meta:
         verbose_name = u'książkach'
 
+    def get_absolute_url(self):
+        """Zwraca adres URL dla tego modelu"""
+        return '/book/%s/' % self.isbn
+
 class BookInstance(models.Model):
     """Ta tabela określa egzemplarze książek dostępne w systemie"""
     book = models.ForeignKey(Book, related_name='instances', verbose_name=u'Książka')
@@ -22,6 +27,10 @@ class BookInstance(models.Model):
 
     is_damaged = models.BooleanField(default=False, verbose_name=u'Czy uszkodzona?')
     is_lost = models.BooleanField(default=False, verbose_name=u'Czy zagubiona?')
+
+    def get_absolute_url(self):
+        """Zwraca adres URL dla tego modelu"""
+        return '/instance/%s/' % urlquote(self.code)
 
     def is_rented(self):
         """
