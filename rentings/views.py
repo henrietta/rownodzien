@@ -39,6 +39,7 @@ def register_return(request, code):
             bookinstance.get_renting().close(was_damaged=form.cleaned_data['was_damaged'],
                                              was_lost=form.cleaned_data['was_lost'])
             # Teraz przekieruj na stronę egzemplarza
+            messages.add_message(request, messages.INFO, u'Zarejestrowano zwrot egzemplarza')
             return redirect(bookinstance.get_absolute_url())
 
     return render_to_response('rentings/return.html', request,
@@ -59,6 +60,7 @@ def register_rent(request, code):
         if form.is_valid():
             form.instance.bookinstance = bookinstance
             form.save()
+            messages.add_message(request, messages.INFO, u'Zarejestrowano wypożyczenie egzemplarza')
             # Teraz przekieruj na stronę egzemplarza
             return redirect(bookinstance.get_absolute_url())
 
