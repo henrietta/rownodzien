@@ -21,4 +21,28 @@
     {% else %}
         <a href="/register/{{ instance.code|urlencode }}/">Wypożycz</a>
     {% endif %}
+    <hr>
+    <table id="rentlog">
+        <tr><td colspan="4">Rejestr wypożyczeń</td></tr>
+        <tr>
+            <th>Kiedy wypożyczono?</th>
+            <th>Kiedy oddano?</th>
+            <th>Komu?</th>
+            <th>Kto?</th>
+        </tr>
+        {% for rent in rentlog %}
+        <tr>
+            <td>{{ rent.when_rented }}</td>
+            <td>
+                {% if rent.real_due == None %}
+                    NIE ODDANO
+                {% else %}
+                    {{ rent.real_due }}
+                {% endif %}
+            </td>
+            <td><a href="{{ rent.whom.get_absolute_url }}">{{ rent.whom }}</a></td>
+            <td><a href="{{ rent.who.get_absolute_url }}">{{ rent.who }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

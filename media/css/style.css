@@ -13,3 +13,6 @@ a { color: white; }
         font-size: 40px;
         margin: 0 0 0 0;
     }
+
+#rentlog td, #rentlog th { border: 1px solid white; padding: 2px 4px 2px 4px; }
+#rentlog { border-collapse: collapse; text-align: center; }

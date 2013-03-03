@@ -43,7 +43,10 @@ def edit_instance(request, code):
             messages.add_message(request, messages.INFO, u'Zmieniono egzemplarz')
             return redirect('/instance/%s/' % urlquote(form.instance.code))
 
-    return render_to_response('instances/edit.html', request, form=form, instance=instance)
+    # Wygeneruj log wypożyczeń
+    rentlog = instance.rentings.order_by('-when_rented')
+
+    return render_to_response('instances/edit.html', request, form=form, instance=instance, rentlog=rentlog)
 
 def delete_instance(request, code):
     """Kontroler kasowania egzemplarza"""
