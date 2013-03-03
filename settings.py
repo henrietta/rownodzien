@@ -93,6 +93,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rownodzien.people',
+    'rownodzien.rentings',
     'rownodzien.books',
 )
 
