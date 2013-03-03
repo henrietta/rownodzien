@@ -19,3 +19,24 @@ class BookRent(models.Model):
 
     official_due = models.DateTimeField(verbose_name=u'Obliczona data oddania')
     real_due = models.DateTimeField(default=None, null=True, verbose_name=u'Rzeczywista dana oddania')
+
+
+    def close(self, was_damaged=False, was_lost=False):
+        """
+        Rejestruje zwrot na danym wypożyczeniu.
+
+        Flagi podane jako parametr będą naniesione na egzemplarz. Ta
+        metoda zapisuje model ten i swojego egzemplarza.
+
+        @param was_damaged: Czy książka została oddana zniszczona
+        @param was_lost: Czy zwrot jest zwrotem wirtualnym, służącym rejestrowaniu
+            zagubionego egzemplarza
+        """
+        if was_damaged:
+            self.bookinstance.is_damaged = True
+        if was_lost:
+            self.bookinstance.is_lost = True
+        self.bookinstance.save()
+
+        self.real_due  = datetime.now()
+        self.save()
