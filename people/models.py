@@ -11,7 +11,12 @@ class Reader(models.Model):
     phone = models.CharField(max_length=30, verbose_name=u'Telefon')
 
     def __unicode__(self):
+        """Do prezentacji w formularzach - tekstowa postać tego rekordu"""
         return u'#%s %s %s' % (self.number, self.name, self.surname)
+
+    def get_absolute_url(self):
+        """Adres URL tego modelu"""
+        return '/reader/%s/' % self.number
 
 class Librarian(models.Model):
     """Ta tabela określa bibliotekarzy obecnych w systemie"""
@@ -23,8 +28,12 @@ class Librarian(models.Model):
     pesel = models.CharField(max_length=11, verbose_name=u'PESEL')
 
     def __unicode__(self):
+        """Do prezentacji w formularzach - tekstowa postać tego rekordu"""
         return u'#%s %s %s' % (self.number, self.name, self.surname)
 
+    def get_absolute_url(self):
+        """Adres URL tego modelu"""
+        return '/librarian/%s/' % self.number
 
 def get_unique_number(model):
     """

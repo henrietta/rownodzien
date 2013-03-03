@@ -20,7 +20,6 @@ class BookRent(models.Model):
     official_due = models.DateTimeField(verbose_name=u'Obliczona data oddania')
     real_due = models.DateTimeField(default=None, null=True, verbose_name=u'Rzeczywista dana oddania')
 
-
     def close(self, was_damaged=False, was_lost=False):
         """
         Rejestruje zwrot na danym wypożyczeniu.

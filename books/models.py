@@ -43,4 +43,13 @@ class BookInstance(models.Model):
         """
         return self.rentings.filter(real_due__isnull=True).count() == 1
 
+    def get_renting(self):
+        """
+        Zwraca obiekt BookRent który dotyczy aktualnego wypożyczenia książki.
 
+        Rzuca ValueError jeśli książka nie jest wypożyczona
+        """
+        try:
+            return self.rentings.get(real_due__isnull=True)
+        except:
+            raise ValueError, u'Książka nie jest wypożyczona'

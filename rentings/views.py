@@ -19,7 +19,35 @@ class BookRentForm(forms.ModelForm):
         model = BookRent
         exclude = ('bookinstance', 'real_due')
 
+class BookReturnForm(forms.Form):
+    """Formularz służący do zwrotu książki"""
+    when_returned = forms.DateTimeField(initial=datetime.now, label=u'Kiedy oddano')
+    was_damaged = forms.BooleanField(required=False, label=u'Czy uszkodzona?')
+    was_lost = forms.BooleanField(required=False, label=u'Czy zagubiona?')
+
+def register_return(request, code):
+    """Kontroler zwrotu książki"""
+    bookinstance = get_object_or_404(BookInstance, code=code)
+
+    if not bookinstance.is_rented():
+        return sysfault(u'Ten egzemplarz nie wypożyczony, tak więc nie można go oddać!')
+
+    form = BookReturnForm()
+    if request.method == 'POST':
+        form = BookReturnForm(request.POST)
+        if form.is_valid():
+            bookinstance.get_renting().close(was_damaged=form.cleaned_data['was_damaged'],
+                                             was_lost=form.cleaned_data['was_lost'])
+            # Teraz przekieruj na stronę egzemplarza
+            return redirect(bookinstance.get_absolute_url())
+
+    return render_to_response('rentings/return.html', request,
+                                bookinstance=bookinstance,
+                                bookrent=bookinstance.get_renting(),
+                                form=form)
+
 def register_rent(request, code):
+    """Kontroler wypożyczenia książki"""
     bookinstance = get_object_or_404(BookInstance, code=code)
 
     if bookinstance.is_rented():
@@ -32,7 +60,7 @@ def register_rent(request, code):
             form.instance.bookinstance = bookinstance
             form.save()
             # Teraz przekieruj na stronę egzemplarza
-            return redirect('/instance/%s/' % urlquote(bookinstance.code))
+            return redirect(bookinstance.get_absolute_url())
 
     return render_to_response('rentings/renting.html', request,
                                 bookinstance=bookinstance,

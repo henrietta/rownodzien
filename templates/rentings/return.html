@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}równodzień - rejestruj zwrot{% endblock %}
+
+{% block content %}
+    Aktualnie próbujesz zarejestrować zwrot egzemplarza o <a href="{{ bookinstance.get_absolute_url }}">numerze {{ bookinstance.code }}</a> książki <a href="{{ bookinstance.book.get_absolute_url }}">{{ bookinstance.book.title }}</a> która została wypożyczona o {{ bookrent.when_rented }} przez czytelnika <a href="{{ bookrent.whom.get_absolute_url }}">{{ bookrent.whom }}</a> a bibliotekarza <a href="{{ bookrent.who.get_absolute_url }}">{{ bookrent.who }}</a>.
+    <hr>
+    <form action="/return/{{ bookinstance.code|urlencode }}/" method="POST">
+        <table>
+        {{ form.as_table }}
+        <tr><td colspan="2"><input type="submit" value="Zapisz"></td></tr>
+        </table>
+    </form>
+{% endblock %}

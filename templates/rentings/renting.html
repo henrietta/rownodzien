@@ -3,7 +3,7 @@
 {% block title %}równodzień - rejestruj wypożyczenie{% endblock %}
 
 {% block content %}
-    <form action="/rent/register/{{ bookinstance.code|urlencode }}/" method="POST">
+    <form action="/register/{{ bookinstance.code|urlencode }}/" method="POST">
         <table>
         {{ form.as_table }}
         <tr><td colspan="2"><input type="submit" value="Zapisz"></td></tr>
