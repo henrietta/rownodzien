@@ -6,11 +6,15 @@ from urllib import quote_plus as urlquote
 
 class Book(models.Model):
     """Ta tabela określa książki dostępne w systemie"""
-    author = models.CharField(max_length=40, verbose_name=u'Autor')
-    title = models.CharField(max_length=40, verbose_name=u'Tytuł')
-    year = models.IntegerField(verbose_name=u'Rok wydania')
-
-    isbn = models.CharField(max_length=13, unique=True, verbose_name=u'ISBN')
+    author = models.CharField(blank=True, max_length=40, verbose_name=u'Autor')
+    title = models.CharField(blank=True, max_length=40, verbose_name=u'Tytuł')
+    year = models.IntegerField(blank=True, null=True, verbose_name=u'Rok wydania')
+    isbn = models.CharField(blank=True, max_length=13, unique=True, verbose_name=u'ISBN')
+    publish_place = models.CharField(blank=True, max_length=40, verbose_name=u'Miejsce wydania')
+   
+    year_pl = models.IntegerField(blank=True, null=True, verbose_name=u'Rok wydania polskiego')
+    language = models.CharField(blank=True, default=u'Polski', max_length=20, verbose_name=u'Język')
+    translation = models.CharField(blank=True, max_length=40, verbose_name=u'Przekład')
 
     class Meta:
         verbose_name = u'książkach'
@@ -25,7 +29,7 @@ class BookInstance(models.Model):
 
     code = models.CharField(max_length=14, unique=True, verbose_name=u'Nr lub kod kreskowy')
 
-    is_damaged = models.BooleanField(default=False, verbose_name=u'Czy uszkodzona?')
+    is_damaged = models.BooleanField(default=False, verbose_name=u'Czy uszkodzona ?')
     is_lost = models.BooleanField(default=False, verbose_name=u'Czy zagubiona?')
 
     def get_absolute_url(self):
