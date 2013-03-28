@@ -19,6 +19,7 @@
     {% if instance.is_rented %}
         Już wypożyczona - czytelnikowi <a href="{{ instance.get_renting.whom.get_absolute_url }}">{{ instance.get_renting.whom }}</a>. Chcesz <a href="/return/{{ instance.code|urlencode }}/">zwrócić</a>?
     {% else %}
+    <a href="/instance/{{ instance.code|urlencode }}/delete/">Skasuj</a>, 
         <a href="/register/{{ instance.code|urlencode }}/">Wypożycz</a>
     {% endif %}
     <hr>
