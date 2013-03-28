@@ -19,7 +19,6 @@ class BookForm(forms.ModelForm):
 
         # sprawdz czy to poprawny ISBN
         if not pyisbn.Isbn(isbn).validate():
-            raise Exception, isbn
             raise forms.ValidationError(u'Błędny ISBN')
         else:
             return isbn
