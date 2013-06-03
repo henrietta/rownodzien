@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}równodzień - egzemplarze{% endblock %}
+
+{% block content %}
+<h1>{{ book.title }} - {{ book.author }}</h1>
+
+	<table border="1">
+		<tr>
+			<td>Działanie</td>
+			<td>Autor</td>
+			<td>Tytuł</td>
+			<td>Rok</td>
+			<td>ISBN</td>
+			<td>Miejsce wydania</td>
+			<td>Język</td>
+			<td>Data wydania polskiego</td>
+			<td>Przekład</td>
+			<td>Kod</td>
+		</tr>
+		{% for i in instances %}
+		<tr>
+			<td>{% if i.is_rented == 0 %}
+				<a href ="/register/{{ i.code }}/">Wypożycz</a> 
+				{% else %} Wypożyczona 
+				{% endif %}
+			</td>
+			<td>{{ i.book.author }}</td>
+			<td>{{ i.book.title }}</td>
+			<td>{{ i.book.year }}</td>
+			<td>{{ i.book.isbn }}</td>
+			<td>{{ i.book.publish_place }} </td>
+			<td>{{ i.book.language }}</td>
+			<td>{{ i.book.year_pl}}</td>
+			<td>{{ i.book.translation }}</td>
+			<td>{{ i.code }}</td>
+		</tr>
+		{% endfor %}
+	
+{% endblock content %}
