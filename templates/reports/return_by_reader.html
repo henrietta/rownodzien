@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}równodzień - zwroty czytelnika{% endblock %}
+
+{% block content %}
+
+	<h1>Czytelnik: {{ reader.name }} {{ reader.surname }}</h1>
+	<table border="1">
+		<tr>
+			<td>Działanie</td>
+			<td>Autor</td>
+			<td>Tytuł</td>
+			<td>Data wypożyczenia</td>
+		</tr>
+
+		{% for i in instances %}
+		<tr>
+			<td><a href="/return/{{ i.code }}/">Zwróć</a></td>
+			<td>{{ i.book.author }}</td>
+			<td>{{ i.book.title }}</td>
+			<td> DATA </td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	
+{% endblock content %}
