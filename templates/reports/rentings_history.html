@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}równodzień - historia wypożyczeń{% endblock %}
+
+{% block content %}
+
+	<table border="1">
+		<tr>
+			<td>Kto wypożycza?</td>
+			<td>Kto wypożyczył?</td>
+			<td>Kod egzemplarza?</td>
+			<td>Data wypożyczenia</td>
+			<td>Data oddania</td>
+		</tr>
+		{% for i in renting %}
+			<tr>
+				<td>{{ i.who }}</td>
+				<td>{{ i.whom }}</td>
+				<td>{{ i.bookinstance.code }}</td>
+				<td>{{ i.when_rented }}</td>
+				<td>{{ i.official_due }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+{% endblock content %}
