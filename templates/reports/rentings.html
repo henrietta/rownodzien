@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}równodzień - aktualne wypożyczenia{% endblock %}
+
+{% block content %}
+
+	<table border="1">
+		<tr>
+			<td>Zwrot</td>
+			<td>Kto wypożycza?</td>
+			<td>Kto wypożyczył?</td>
+			<td>Kod egzemplarza</td>
+			<td>Data wypożyczenia</td>
+			<td>Data oddania</td>
+		</tr>
+		{% for i in renting %}
+			{% if i.bookinstance.is_rented == 1 %}
+				<tr>
+					<td><a href="/return/{{ i.bookinstance.code }}/">Zwróć</a></td>
+					<td>{{ i.who }}</td>
+					<td>{{ i.whom }}</td>
+					<td>{{ i.bookinstance.code }}</td>
+					<td>{{ i.when_rented }}</td>
+					<td>{{ i.official_due }}</td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+
+{% endblock content %}
