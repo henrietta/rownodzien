@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}równodzień - książki{% endblock %}
+
+{% block content %}
+
+	<table border="1">
+		<tr>
+			<td>Dostępność</td>
+			<td>Autor</td>
+			<td>Tytuł</td>
+			<td>Rok</td>
+			<td>ISBN</td>
+			<td>Miejsce wydania</td>
+			<td>Język</td>
+			<td>Data wydania polskiego</td>
+			<td>Przekład</td>
+		</tr>
+		{% for i in book %}
+		<tr>
+			<td>
+				{% if i.dostepne > 0 %} 
+					<a href="/reports/ava_instances/{{ i.isbn }}/">{{ i.dostepne }}/{{ i.instances__count }}</a>
+				{% else %}
+					{{ i.dostepne }}/{{ i.instances__count }}
+				{% endif %}
+			</td>
+			<td>{{ i.author }}</td>
+			<td>{{ i.title }}</td>
+			<td>{{ i.year }}</td>
+			<td>{{ i.isbn }}</td>
+			<td>{{ i.publish_place }} </td>
+			<td>{{ i.language }}</td>
+			<td>{{ i.year_pl }}</td>
+			<td>{{ i.translation }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+{% endblock content %}
