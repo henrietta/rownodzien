@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}równodzień - czytelnicy{% endblock %}
+
+{% block content %}
+
+	<table border="1">
+		<tr>
+			<td>Działanie</td>
+			<td>Imię</td>
+			<td>Nazwisko</td>
+			<td>Wypożyczone</td>
+			<td>Transakcje</td>
+		</tr>
+
+	{% for i in reader %}
+		<tr>
+			<td>
+				{% if i.aktualne > 0 %} <a href="/reports/return_by_reader/{{ i.pesel }}/">Dokonaj zwrotu</a>
+				{% else %} Brak
+				{% endif %}
+			</td>
+
+			<td>{{ i.name }}</td>
+			<td>{{ i.surname }}</td>
+			<td>{{ i.aktualne }}</td>
+			<td>{{ i.rentings__count }}</td>
+		</tr>
+	{% endfor %}
+
+		
+{% endblock content %}
