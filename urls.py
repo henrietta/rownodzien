@@ -21,6 +21,14 @@ urlpatterns = patterns('rownodzien',
     url(r'^register/(?P<code>\d+)/$', 'rentings.views.register_rent'),
     url(r'^return/(?P<code>\d+)/$', 'rentings.views.register_return'),
 
+    
+    url(r'^reports/books/', 'reports.views.report_books'),
+    url(r'^reports/instances/', 'reports.views.report_instances'),
+    url(r'^reports/rentings/', 'reports.views.report_rentings'),
+    url(r'^reports/rentings_history/', 'reports.views.report_rentingshistory'),
+    url(r'^reports/readers/', 'reports.views.report_readers'),
+    url(r'^reports/return_by_reader/(?P<pesel>\d+)/$','reports.views.report_returnbyreader'),
+    url(r'^reports/ava_instances/(?P<isbn>\d+)/$','reports.views.report_avainstances'),
 )
 
 urlpatterns += staticfiles_urlpatterns()
