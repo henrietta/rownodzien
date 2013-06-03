@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}równodzień - egzemplarze{% endblock %}
+
+{% block content %}
+
+	<table border="1">
+		<tr>
+			<td>Działanie</td>
+			<td>Autor</td>
+			<td>Tytuł</td>
+			<td>Rok</td>
+			<td>ISBN</td>
+			<td>Miejsce wydania</td>
+			<td>Język</td>
+			<td>Data wydania polskiego</td>
+			<td>Przekład</td>
+			<td>Kod</td>
+			<td>Uszkodzona?</td>
+			<td>Zagubiona?</td>
+			<td>Wypożyczona?</td>
+		</tr>
+		{% for i in instance %}
+		<tr>
+			<td>{% if i.is_rented == 0 %}
+				<a href ="/register/{{ i.code }}/">Wypożycz</a> 
+				{% else %} Wypożyczona 
+				{% endif %}
+			</td>
+			<td>{{ i.book.author }}</td>
+			<td>{{ i.book.title }}</td>
+			<td>{{ i.book.year }}</td>
+			<td>{{ i.book.isbn }}</td>
+			<td>{{ i.book.publish_place }} </td>
+			<td>{{ i.book.language }}</td>
+			<td>{{ i.book.year_pl}}</td>
+			<td>{{ i.book.translation }}</td>
+			<td>{{ i.code }}</td>
+			<td>{% if i.is_damaged == 0 %} Nie {% else %} Tak {% endif %}</td>
+			<td>{% if i.is_lost == 0 %} Nie {% else %} Tak {% endif %}</td>
+			<td>{% if i.is_rented == 0 %} Nie {% else %} Tak {% endif %}</td>
+		</tr>
+		{% endfor %}
+
+{% endblock content %}
