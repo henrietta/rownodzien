@@ -28,11 +28,11 @@
 			<td>{{ i.author }}</td>
 			<td>{{ i.title }}</td>
 			<td>{{ i.year }}</td>
-			<td>{{ i.isbn }}</td>
+			<td><a href="/book/{{ i.isbn }}/">{{ i.isbn }}</a></td>
 			<td>{{ i.publish_place }} </td>
 			<td>{{ i.language }}</td>
-			<td>{{ i.year_pl }}</td>
-			<td>{{ i.translation }}</td>
+			<td>{% if i.year_pl %}{{ i.year_pl }}{% else %}Brak{% endif %}</td>
+			<td>{% if i.translation %}{{ i.translation }}{% else %}Brak{% endif %}</td>
 		</tr>
 		{% endfor %}
 	</table>
