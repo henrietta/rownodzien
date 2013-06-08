@@ -3,6 +3,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('rownodzien',
     url(r'^$', 'main.views.main'),
+    url(r'^login/$', 'main.views.login'),
+    url(r'^logout/$', 'main.views.logout'),
     url(r'^book/add/$', 'books.books.add_book'),
     url(r'^book/(?P<isbn>\d+)/delete/$', 'books.books.delete_book'),
     url(r'^book/(?P<isbn>\d+)/add_instance/$', 'books.instances.add_instance'),

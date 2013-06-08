@@ -78,6 +78,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.transaction.TransactionMiddleware',    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'rownodzien.main.middleware.LibrarianLoginMiddleware',
 )
 
 ROOT_URLCONF = 'rownodzien.urls'
