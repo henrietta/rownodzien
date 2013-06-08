@@ -31,8 +31,8 @@
 			<td>{{ i.book.isbn }}</td>
 			<td>{{ i.book.publish_place }} </td>
 			<td>{{ i.book.language }}</td>
-			<td>{{ i.book.year_pl}}</td>
-			<td>{{ i.book.translation }}</td>
+			<td>{% if i.book.year_pl %}{{ i.book.year_pl}}{% else %}Brak{% endif %}</td>
+			<td>{% if i.book.translation %}{{ i.book.translation }}{% else %}Brak{% endif %}</td>
 			<td>{{ i.code }}</td>
 		</tr>
 		{% endfor %}

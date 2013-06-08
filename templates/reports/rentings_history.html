@@ -18,7 +18,7 @@
 				<td>{{ i.whom }}</td>
 				<td>{{ i.bookinstance.code }}</td>
 				<td>{{ i.when_rented }}</td>
-				<td>{{ i.official_due }}</td>
+				<td>{% if i.real_due %}{{ i.real_due }}{% else %}WYPOŻYCZONA{% endif %}</td>
 			</tr>
 		{% endfor %}
 	</table>
