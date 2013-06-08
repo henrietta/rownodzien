@@ -22,6 +22,7 @@ urlpatterns = patterns('rownodzien',
     url(r'^return/(?P<code>\d+)/$', 'rentings.views.register_return'),
 
     
+    url(r'^reports/books/before_1980/', 'reports.views.report_books', {'before_1980': True}),
     url(r'^reports/books/', 'reports.views.report_books'),
     url(r'^reports/instances/', 'reports.views.report_instances'),
     url(r'^reports/rentings/', 'reports.views.report_rentings'),

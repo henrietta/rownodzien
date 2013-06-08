@@ -7,8 +7,10 @@ from rownodzien.books.models import Book
 from django.db.models import Count
 
 """Raport o dostępnych książkach"""
-def report_books(request):
+def report_books(request, before_1980=False):
   books = Book.objects.all().annotate(Count('instances'))
+  if before_1980:
+    books = books.filter(year__lt=1980)
   for book in books:
     liczba_wypozyczonych = 0
     for instance in book.instances.all():
