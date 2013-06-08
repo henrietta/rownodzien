@@ -54,7 +54,8 @@ def register_rent(request, code):
     if bookinstance.is_rented():
         return sysfault(u'Ten egzemplarz jest już wypożyczony i nie można go wypożyczyć ponownie!')
 
-    form = BookRentForm(initial={'official_due': datetime.now()+STANDARD_RENTING_TIME})
+    form = BookRentForm(initial={'official_due': datetime.now()+STANDARD_RENTING_TIME,
+                                 'who': request.librarian})
     if request.method == 'POST':
         form = BookRentForm(request.POST)
         if form.is_valid():
