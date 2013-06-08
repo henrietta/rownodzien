@@ -56,3 +56,8 @@ def delete_reader(request, number):
     get_object_or_404(Reader, number=Decimal(number)).delete()
     messages.add_message(request, messages.INFO, u'Usunięto czytelnika')
     return redirect('/')
+
+def view_readers(request):
+    readers = Reader.objects.all()
+
+    return render_to_response('readers/view.html', request, readers=readers)    

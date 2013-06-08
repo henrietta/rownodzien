@@ -15,10 +15,12 @@ urlpatterns = patterns('rownodzien',
     url(r'^reader/add/$', 'people.readers.add_reader'),
     url(r'^reader/(?P<number>\d+)/delete/$', 'people.readers.delete_reader'),
     url(r'^reader/(?P<number>\d+)/$', 'people.readers.edit_reader'),
+    url(r'^readers/$', 'people.readers.view_readers'),
 
     url(r'^librarian/add/$', 'people.librarians.add_librarian'),
     url(r'^librarian/(?P<number>\d+)/delete/$', 'people.librarians.delete_librarian'),
     url(r'^librarian/(?P<number>\d+)/$', 'people.librarians.edit_librarian'),
+    url(r'^librarians/$', 'people.librarians.view_librarians'),
 
     url(r'^register/(?P<code>\d+)/$', 'rentings.views.register_rent'),
     url(r'^return/(?P<code>\d+)/$', 'rentings.views.register_return'),

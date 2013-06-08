@@ -56,3 +56,9 @@ def delete_librarian(request, number):
     get_object_or_404(Librarian, number=Decimal(number)).delete()
     messages.add_message(request, messages.INFO, u'Usunięto bibliotekarza')
     return redirect('/')
+
+
+def view_librarians(request):
+    librarians = Librarian.objects.all()
+
+    return render_to_response('librarians/view.html', request, librarians=librarians)

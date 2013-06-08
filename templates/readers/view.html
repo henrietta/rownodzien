@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}równodzień - egzemplarze{% endblock %}
+
+{% block content %}
+    <table border="1">
+        <tr>
+            <td>Nr</td>
+            <td>Imię</td>
+            <td>Nazwisko</td>
+            <td>PESEL</td>
+        </tr>
+        {% for i in readers %}
+        <tr>
+
+            <td><a href="/reader/{{ i.id }}/">{{ i.id }}</a></td>
+            <td>{{ i.name }}</td>
+            <td>{{ i.surname }}</td>
+            <td>{{ i.pesel }}</td>
+        </tr>
+        {% endfor %}
+    
+{% endblock content %}
