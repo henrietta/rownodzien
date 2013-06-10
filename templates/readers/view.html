@@ -9,6 +9,7 @@
             <td>Imię</td>
             <td>Nazwisko</td>
             <td>PESEL</td>
+            <td>Lista zwrotów</td>
         </tr>
         {% for i in readers %}
         <tr>
@@ -17,6 +18,7 @@
             <td>{{ i.name }}</td>
             <td>{{ i.surname }}</td>
             <td>{{ i.pesel }}</td>
+            <td><a href="/reports/return_by_reader/{{ i.pesel }}/">Zwroty</a></td>
         </tr>
         {% endfor %}
     

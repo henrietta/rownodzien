@@ -54,13 +54,12 @@ def report_returnbyreader(request, pesel):
   rents = []
   insts = []
 
-  for renting in BookRent.objects.all():
-    if (renting.whom == reader and renting.real_due == None):
-      rents.append(renting)
-      for instance in BookInstance.objects.all():
-        if instance == renting.bookinstance:
-          insts.append(instance)
-          continue
+  for renting in BookRent.objects.filter(whom=reader).filter(real_due__exact=None):
+    rents.append(renting)
+    for instance in BookInstance.objects.all():
+      if instance == renting.bookinstance:
+        insts.append(instance)
+        continue
 
   return render_to_response('reports/return_by_reader.html', {'reader': reader, 'rentings': rents, 'instances': insts})
 

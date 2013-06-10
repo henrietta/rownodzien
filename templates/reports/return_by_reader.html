@@ -10,15 +10,17 @@
 			<td>Działanie</td>
 			<td>Autor</td>
 			<td>Tytuł</td>
+			<td>Kod</td>
 			<td>Data wypożyczenia</td>
 		</tr>
 
-		{% for i in instances %}
+		{% for i in rentings %}
 		<tr>
-			<td><a href="/return/{{ i.code }}/">Zwróć</a></td>
-			<td>{{ i.book.author }}</td>
-			<td>{{ i.book.title }}</td>
-			<td> DATA </td>
+			<td><a href="/return/{{ i.bookinstance.code }}/">Zwróć</a></td>
+			<td>{{ i.bookinstance.book.author }}</td>
+			<td><a href="/book/{{ i.bookinstance.book.isbn }}/">{{ i.bookinstance.book.title }}</a></td>
+			<td><a href="/instance/{{ i.bookinstance.code }}/">{{ i.bookinstance.code }}</a></td>
+			<td>{{ i.when_rented }}</td>
 		</tr>
 		{% endfor %}
 	</table>
