@@ -61,8 +61,7 @@ def report_avainstances(request, isbn):
   book = get_object_or_404(Book, isbn=isbn)
   insts = []
 
-  for instance in BookInstance.objects.all():
-    if (instance.book == book and instance.is_rented() == 0 and instance.is_damaged == 0 and instance.is_lost == 0):
-      insts.append(instance)
+  insts = BookInstance.objects.filter(book=book).filter(is_damaged=False).filter(is_lost=False)
+  insts = [instance for instance in insts if not instance.is_rented()]
 
   return render_to_response('reports/ava_instances.html', {'book': book, 'instances': insts})
