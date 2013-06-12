@@ -51,18 +51,10 @@ def report_readers(request):
 """Zwracanie wypożyczonych książek przez czytelnika"""
 def report_returnbyreader(request, pesel):
   reader = get_object_or_404(Reader, pesel=pesel)
-  rents = []
-  insts = []
 
-  for renting in BookRent.objects.all():
-    if (renting.whom == reader and renting.real_due == None):
-      rents.append(renting)
-      for instance in BookInstance.objects.all():
-        if instance == renting.bookinstance:
-          insts.append(instance)
-          continue
+  rents = BookRent.objects.filter(real_due__exact=None).filter(whom=reader)
 
-  return render_to_response('reports/return_by_reader.html', {'reader': reader, 'rentings': rents, 'instances': insts})
+  return render_to_response('reports/return_by_reader.html', {'reader': reader, 'instances': rents})
 
 """Zwracanie dostępnych egzemplarzy danej książki"""
 def report_avainstances(request, isbn):
