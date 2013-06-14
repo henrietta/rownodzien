@@ -18,10 +18,13 @@ class BookForm(forms.ModelForm):
         isbn = isbn.replace('-', '')            # usun pauzy
 
         # sprawdz czy to poprawny ISBN
-        if not pyisbn.Isbn(isbn).validate():
-            raise forms.ValidationError(u'Błędny ISBN')
-        else:
-            return isbn
+        try:
+            if not pyisbn.Isbn(isbn).validate():
+                raise forms.ValidationError(u'Błędny ISBN')
+            else:
+                return isbn
+        except:
+            raise forms.ValidationError(u'ISBN to ciąg cyfr')
 
 def add_book(request):
     """Kontroler dodawania książki"""
