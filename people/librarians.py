@@ -2,7 +2,7 @@
 """Kontrolery obsługujące zarządzanie czytelnikami"""
 from django.shortcuts import redirect, get_object_or_404
 from django import forms
-from django.contrib.localflavor.pl.forms import PLPESELField
+from localflavor.pl.forms import PLPESELField
 from django.contrib import messages
 from decimal import Decimal
 
